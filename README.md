@@ -2,8 +2,10 @@
 
 1. creating routes using hono  => c is context which contain   req, res, next
 
-initialize DB prisma 13:21
 
-2. initialize perisma db with prisma accelearate for connection pool
+2. initialize prisma db with prisma accelearate for connection pool
 
-initialize prisma client 44:42
+
+3. Create signup route adding and generate jwt token
+    start middleware  1:12:33
+
