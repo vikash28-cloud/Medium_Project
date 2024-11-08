@@ -7,5 +7,9 @@
 
 
 3. Create signup route adding and generate jwt token
-    start middleware  1:12:33
+    
 
+4. we can ignore ts error by using comment //@ts-ignore
+
+5. created authentication middleware 
+    start blog routes next video also cover doubts 
