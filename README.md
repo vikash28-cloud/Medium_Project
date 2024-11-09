@@ -12,4 +12,7 @@
 4. we can ignore ts error by using comment //@ts-ignore
 
 5. created authentication middleware 
-    start blog routes next video also cover doubts 
+    
+6. created create blog route
+
+01:05:53 update blog post route
