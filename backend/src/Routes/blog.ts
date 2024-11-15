@@ -2,6 +2,10 @@ import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { Hono } from "hono";
 import { authMiddleware } from "../Middleware/authMiddleware";
+import {
+  createblogInput,
+  updateBlodInput
+} from "@vikashsharma2896/medium-common";
 
 export const blogRouter = new Hono<{
   Bindings: {
@@ -17,11 +21,16 @@ blogRouter.use("*", authMiddleware);
 
 // create blog post
 blogRouter.post("/createBlog", async (c) => {
+  const body = await c.req.json();
+  const { success } = createblogInput.safeParse(body);
+  if (!success) {
+    c.status(411);
+    return c.json({ msg: "enter valid credentials" });
+  }
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
   const authorId = c.get("userId"); //take it from auth middleware
-  const body = await c.req.json();
   const blog = await prisma.post.create({
     data: {
       title: body.title,
@@ -38,11 +47,17 @@ blogRouter.post("/createBlog", async (c) => {
 
 // update blog post
 blogRouter.put("/updateBlog", async (c) => {
+  const body = await c.req.json();
+  const { success } = updateBlodInput.safeParse(body);
+  if (!success) {
+    c.status(411);
+    return c.json({ msg: "enter valid credentials" });
+  }
+
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
 
-  const body = await c.req.json();
   const blog = await prisma.post.update({
     where: {
       id: body.id,
