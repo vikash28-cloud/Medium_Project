@@ -14,5 +14,7 @@
 
 7. testing and deploy backend on cloudflare
 
-8. 
-npm publish gives error
+8. adding zod validations in common folder and publish it on npm
+
+9. initialize frontend 
+ building signup comp.
