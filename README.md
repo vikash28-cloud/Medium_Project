@@ -17,4 +17,5 @@
 8. adding zod validations in common folder and publish it on npm
 
 9. initialize frontend 
- building signup comp.
+
+10. making auth.tsx inside signup comp
