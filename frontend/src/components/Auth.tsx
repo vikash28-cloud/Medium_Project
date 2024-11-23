@@ -1,21 +1,105 @@
+import { SignupInput } from "@vikashsharma2896/medium-common";
+import { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Auth = ({ type }: { type: "signin || signup" }) => {
+const Auth = ({ type }: { type: "signin" | "signup" }) => {
+  const [postInputs, setPostinputs] = useState<SignupInput>({
+    name: "",
+    email: "",
+    password: "",
+  });
   return (
     <div className="h-screen flex justify-center flex-col">
       <div className=" flex justify-center">
         <div>
-          <div className="text-4xl font-bold ">
-            Create an Account
-        </div>
-        <div className="text-slate-400"> 
-            Already have an account?
-            <Link to={"/signin"} className="underline">Login</Link>
-        </div>
+          <div className="px-10">
+            <div className="text-4xl font-bold ">{type==="signup"?"Create An Account":"Log in Yourself"}</div>
+            <div className="text-slate-400">
+              {type==="signup"?"Already have an account?":"Don't Have an Account"}
+              <Link to={type==="signup"?"/signin":"/signup"} className="underline">
+                {type==="signup"?"Log In":"SignUp"}
+              </Link>
+            </div>
+          </div>
+          <div className="mt-4">
+
+            {type==="signup"?
+            <LabelledInput
+              label="Name"
+              placeholder="vikash"
+              onchange={(e) => {
+                setPostinputs({
+                  ...postInputs,
+                  name: e.target.value,
+                });
+              }}
+            />
+
+:""}
+            <LabelledInput
+              label="Email"
+              placeholder="vikash@gmail.com"
+              onchange={(e) => {
+                setPostinputs({
+                  ...postInputs,
+                  email: e.target.value,
+                });
+              }}
+            />
+            <LabelledInput
+              label="Password"
+              type="password"
+              placeholder="vikash"
+              onchange={(e) => {
+                setPostinputs({
+                  ...postInputs,
+                  password: e.target.value,
+                });
+              }}
+            />
+          </div>
+          <div>
+            <button
+              type="button"
+              className="text-white mt-8 w-full bg-gray-800 hover:bg-gray-900 focus:outline-none   font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
+            >
+              {type==="signup"?"Sign up":"Log in"}
+            </button>
+          </div>
         </div>
       </div>
     </div>
   );
 };
+
+interface LabelledInputType {
+  label: string;
+  placeholder: string;
+  onchange: (e: ChangeEvent<HTMLInputElement>) => void;
+  type?: string;
+}
+
+function LabelledInput({
+  label,
+  onchange,
+  placeholder,
+  type,
+}: LabelledInputType) {
+  return (
+    <div className="p-2">
+      <label className="block mb-2 text-md text-black font-bold">
+        {label}
+      </label>
+      <input
+        onChange={onchange}
+        type={type}
+        id="first_name"
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+        placeholder={placeholder}
+        required
+      />
+    </div>
+  );
+}
 
 export default Auth;

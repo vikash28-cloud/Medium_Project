@@ -19,3 +19,5 @@
 9. initialize frontend 
 
 10. making auth.tsx inside signup comp
+
+40:47
