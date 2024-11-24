@@ -20,4 +20,6 @@
 
 10. making auth.tsx inside signup comp
 
-40:47
+11. authentication done signup and signin
+deployed backend on cloudflare workers 
+https://backend.expertvikash.workers.dev

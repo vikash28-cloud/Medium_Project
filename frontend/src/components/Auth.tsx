@@ -1,13 +1,38 @@
 import { SignupInput } from "@vikashsharma2896/medium-common";
+import axios from "axios";
 import { ChangeEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "../config";
 
 const Auth = ({ type }: { type: "signin" | "signup" }) => {
+  const navigate = useNavigate();
   const [postInputs, setPostinputs] = useState<SignupInput>({
     name: "",
     email: "",
     password: "",
   });
+
+  async function sendRequest(){
+
+    try {
+      const response=await axios.post(`${BACKEND_URL}/api/v1/user/${type==="signup"?"signup":"signin"}`,postInputs);
+      const jwt = await response.data.token;
+      // console.log(jwt);
+      localStorage.setItem("token",jwt);
+      navigate("/blogs")
+
+    } catch (error) {
+      if(type==="signin"){
+        alert("invalid email or password");
+      }
+      else{
+        alert("invalid credentials")
+      }
+    }
+      
+
+  }
+
   return (
     <div className="h-screen flex justify-center flex-col">
       <div className=" flex justify-center">
@@ -35,7 +60,7 @@ const Auth = ({ type }: { type: "signin" | "signup" }) => {
               }}
             />
 
-:""}
+:null}
             <LabelledInput
               label="Email"
               placeholder="vikash@gmail.com"
@@ -60,6 +85,7 @@ const Auth = ({ type }: { type: "signin" | "signup" }) => {
           </div>
           <div>
             <button
+            onClick={sendRequest}
               type="button"
               className="text-white mt-8 w-full bg-gray-800 hover:bg-gray-900 focus:outline-none   font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2"
             >

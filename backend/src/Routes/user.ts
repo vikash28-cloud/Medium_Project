@@ -35,8 +35,7 @@ userRouter.post("/signup", async (c) => {
   const token = await sign({ id: user.id }, c.env.JWT_SECRET_KEY);
 
   return c.json({
-    msg: "User regestered successfully",
-    jwtToken: token,
+    token
   });
 });
 
@@ -69,7 +68,6 @@ userRouter.post("/signin", async (c) => {
   const jwtToken = await sign({ id: user.id }, c.env.JWT_SECRET_KEY);
 
   return c.json({
-    msg: "user loggedIn successfully",
-    token: jwtToken,
+   jwtToken
   });
 });
