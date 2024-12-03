@@ -23,3 +23,5 @@
 11. authentication done signup and signin
 deployed backend on cloudflare workers 
 https://backend.expertvikash.workers.dev
+
+12. frontend app bar -1:12:45
