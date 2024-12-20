@@ -1,12 +1,19 @@
+import { Link } from "react-router-dom";
 import { Avatar } from "./BlogCard";
 
 export const Appbar = () => {
-  return (
+  return <>
     <div className="border-b flex justify-between px-10 py-4">
+      <Link to="/">
       <div className="flex flex-col justify-center">Medium</div>
-      <div>
-        <Avatar name="Vikash" size={6} />
-      </div>
+    </Link>
+    <div>
+      <Avatar name="Vikash" />
     </div>
-  );
+  </div >
+  
+  </>
+
+    
+  
 };

@@ -15,7 +15,7 @@ export const authMiddleware:MiddlewareHandler= async(c,next)=>{
     // 2. verify the header
     // 3. if the header is correct proceed 
     // 4. if not , we return a user 403 status code
-    const authHeader = c.req.header("authorization")||"";
+    const authHeader = c.req.header("Authorization")||"";
     // const token = header.split(" ")[1];   //if Bearer enfvoeiroerjfeiorfe
     const user  = await verify(authHeader,c.env.JWT_SECRET_KEY);
   

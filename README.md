@@ -25,3 +25,5 @@ deployed backend on cloudflare workers
 https://backend.expertvikash.workers.dev
 
 12. frontend app bar -1:12:45
+
+13. how to expire token

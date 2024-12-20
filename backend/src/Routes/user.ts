@@ -65,9 +65,9 @@ userRouter.post("/signin", async (c) => {
     });
   }
 
-  const jwtToken = await sign({ id: user.id }, c.env.JWT_SECRET_KEY);
+  const token = await sign({ id: user.id }, c.env.JWT_SECRET_KEY);
 
   return c.json({
-   jwtToken
+   token
   });
 });

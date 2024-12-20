@@ -1,4 +1,4 @@
-import { SignupInput } from "@vikashsharma2896/medium-common";
+import { SigninInput, SignupInput } from "@vikashsharma2896/medium-common";
 import axios from "axios";
 import { ChangeEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,11 +6,13 @@ import { BACKEND_URL } from "../config";
 
 const Auth = ({ type }: { type: "signin" | "signup" }) => {
   const navigate = useNavigate();
-  const [postInputs, setPostinputs] = useState<SignupInput>({
-    name: "",
-    email: "",
-    password: "",
-  });
+  const [postInputs, setPostInputs] = useState<SignupInput | SigninInput>(
+    type === "signup"
+      ? { email: "", name: "", password: "" }
+      : { email: "", password: "" }
+  );
+
+ 
 
   async function sendRequest(){
 
@@ -29,8 +31,6 @@ const Auth = ({ type }: { type: "signin" | "signup" }) => {
         alert("invalid credentials")
       }
     }
-      
-
   }
 
   return (
@@ -53,7 +53,7 @@ const Auth = ({ type }: { type: "signin" | "signup" }) => {
               label="Name"
               placeholder="vikash"
               onchange={(e) => {
-                setPostinputs({
+                setPostInputs({
                   ...postInputs,
                   name: e.target.value,
                 });
@@ -65,7 +65,7 @@ const Auth = ({ type }: { type: "signin" | "signup" }) => {
               label="Email"
               placeholder="vikash@gmail.com"
               onchange={(e) => {
-                setPostinputs({
+                setPostInputs({
                   ...postInputs,
                   email: e.target.value,
                 });
@@ -76,7 +76,7 @@ const Auth = ({ type }: { type: "signin" | "signup" }) => {
               type="password"
               placeholder="vikash"
               onchange={(e) => {
-                setPostinputs({
+                setPostInputs({
                   ...postInputs,
                   password: e.target.value,
                 });
